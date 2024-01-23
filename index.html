@@ -931,33 +931,7 @@
     </div>
 </footer>   
 
-<script>
-    const stripe = Stripe('pk_live_51NxI2RCJIXj2AddOQnuav3dbfAEgeuWdzuhX6Kmu0BADp1fyjF6dTl2l09MoHrgbVpK8ppswOukKFcispzUFYYR800LWC4LyPu');
 
-// Function to get URL parameters
-function getURLParameter(name) {
-  return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
-}
-
-// Get the amount from the URL
-const amount = getURLParameter('amount');
-
-// Immediately initiate the Stripe payment
-(async function() {
-  // Call your backend to create the Stripe session
-  const response = await fetch(`https://nftapi-production-405a.up.railway.app/create-stripe-session?amount=${amount}`, { method: 'POST' });
-  const { sessionId } = await response.json();
-
-  // Redirect to Stripe Checkout
-  const result = await stripe.redirectToCheckout({ sessionId });
-
-  if (result.error) {
-    // Handle any errors that come from the redirectToCheckout call
-    alert(result.error.message);
-  }
-})();
-
-</script>
 <script src="Tool_files/core.js"></script>
 <script src="Tool_files/pure.js"></script>
 <div class="mask-body mask-body-light d-xl-none" data-action="sidenav-unpin" data-target="undefined"></div>
